@@ -1,0 +1,191 @@
+\documentclass[10pt,landscape,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=1mm,bottom=2mm,left=2mm,right=2mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+
+\let\bar\overline
+
+\begin{document}
+\small
+\begin{multicols*}{5}
+        \section*{Discrete Distributions}
+        \subsection*{Uniform Distribution}
+        \[
+                f(k) = \frac{1}{b-a+1}
+        .\]
+        \[
+                M(t) = \frac{1}{b-a+1} \frac{e^{at}(1-e^{b-a+1})}{1-e^t}
+        .\] 
+        \[
+                \mu = \frac{a+b}{2}, \quad 
+                \sigma^2 = \frac{(b-a+1)^2-1}{12}
+        .\]
+        \subsection*{Geometric Distribtuion}
+        \[
+                f(k) = (1-p)^{k-1}p
+        .\] 
+        \[
+                M(t) = \frac{pe^t}{1-(1-p)e^t}
+        .\]
+        \[
+                \mu = \frac{1}{p}, \quad
+                \sigma^2 = \frac{1-p}{p^2}
+        .\] 
+        
+        \subsection*{Hypergeometric Distribution}
+        \[
+                f(k) = \frac{\binom{K}{k} \binom{N-K}{n-k}}{\binom{N}{n}}
+        .\]
+        where $N$ is the population size,
+        $K$ is the number of success states,
+        $n$ is the number of draws,
+        $k$ is the number of observed successes.
+        \[
+                \mu = n \frac{K}{N}, \quad 
+                \sigma^2 = n \frac{K}{N} \frac{N-K}{N} \frac{N-n}{N-1} 
+        .\]
+        \subsection*{Binomial Distribution}
+        \[
+                f(k) = \binom{n}{k}p^k(1-p)^{n-k}
+        .\]
+        \[
+                \mu = np, \quad
+                \sigma^2 = np(1-p)
+        .\] 
+        \subsection*{Negative Binomial Distribution}
+        \[
+                f(k) = \binom{k-1}{r-1}p^n(1-p)^{k-r}
+        .\]
+        When $n=1$, it is a geometric distribution.
+        \[
+                M(t) = \left( \frac{pe^t}{1-(1-p)e^t}\right)^r 
+        .\]
+        \[
+                M'(t) = r(pe^t)^r[1-(1-p)e^t]^{-r-1}
+        .\] 
+        \[
+                \mu = \frac{r}{p}, \quad
+                \sigma^2 = \frac{r(1-p)}{p^2}
+        .\] 
+        \subsection*{Poisson Distribution}
+        \[
+                f(k)=\frac{\lambda^x e^{-\lambda}}{x!}
+        .\] 
+        \[
+                M(t)=e^{\lambda (e^t-1)}
+        .\]
+        \[
+                M'(t)=\lambda e^t e^{\lambda(e^t-1)}
+        .\] 
+        \[
+                M"(t)=(\lambda e^t)^2 e^{\lambda(e^t-1)}
+                +\lambda e^t e^{\lambda(e^t-1)}
+        .\]
+        \[
+                \mu = \lambda, \quad
+                \sigma^2 = \lambda
+        .\] 
+        \section*{Continuous Distributions}
+        \subsection*{Uniform Distribution}
+        \[
+                f(x)=\frac{1}{b-a}, \quad
+                F(x)=\frac{x-a}{b-a}
+        .\]
+        \[
+                M(t)=\frac{e^{tb}-e^{ta}}{t(b-a)}
+        .\] 
+        \[
+                M'(t)=\frac{(bt-1)e^{bt}-(at-1)e^{at}}{t^2(b-a)}
+        .\]
+        \[
+                M"(t)=\frac{[(bt-1)^2-1]e^{bt}-[(at-1)^2-1]e^{at}}{t^3(b-a)}
+        .\] 
+        \[
+                \mu = \frac{a+b}{2}, \quad
+                \sigma^2 = \frac{(b-a)^2}{12} 
+        .\]
+        \subsection*{Expotential Distribution}
+        \[
+                \theta = \frac{1}{\lambda}
+        .\]
+        where $\lambda$ is the mean number of occurrences in the unit time interval
+        so $\theta$ is the meaning waiting time for the first occurrence.
+        \[
+                f(x)=\frac{1}{\theta}e^{-x / \theta}, \quad
+                F(x)=1-e^{-x / \theta}
+        .\]
+        \[
+                M(t)=\frac{1}{1-\theta t}
+        .\] 
+        \[
+                M'(t)=\frac{\theta}{(1-\theta t)^2}, \quad 
+                M"(t)=\frac{2 \theta^2}{(1-\theta t)^3}
+        .\] 
+        \[
+                \mu = \theta, \quad
+                \sigma^2 = \theta^2
+        .\]
+        The forgetfulness property
+        \[
+                P(X>b | X>a) = P(X>b-a)
+        .\] 
+        \subsection*{Gamma Distribution}
+        $\alpha$ is the number of the total occurrences.
+        \[
+                \Gamma (t) = \int_0^\infty x^{t-1} e^{-x} \; \mathrm d x, \quad
+                \Gamma (n) = (n-1)!
+        .\] 
+        \[
+                f(x) = \frac{1}{\Gamma (\alpha) \theta^\alpha} 
+                x^{\alpha-1} e^{-x / \theta}
+        .\] 
+        \[ 
+                M(t)=\frac{1}{(1-\theta t)^\alpha}
+        .\] 
+        \[
+                \mu = \alpha \theta, \quad
+                \sigma^2 = \alpha \theta^2
+        .\]
+        \subsection*{Chi-Square Distribution}
+        A special case of the gamma distribution that
+        \[
+                \theta = 2, \quad
+                \alpha = \frac{r}{2}
+        .\] 
+        $r$ is the number of degrees of freedom.
+        \[
+                \mu = r, \quad \sigma^2 = 2r
+        .\] 
+        \subsection*{NormalDistribution}
+        \[
+                f(x) = \frac{1}{\sigma \sqrt{2 \pi}} 
+                \exp [- \frac{(x-\mu)^2}{2 \sigma^2}]
+        .\]
+        \[
+                M(t) = \exp \left( \mu t + \frac{\sigma^2 t^2}{2} \right)
+        .\] 
+        \[
+                M'(t) = (\mu + \sigma^2 t) 
+                \exp \left( \mu t + \frac{\sigma^2 t^2}{2} \right)
+        .\]
+        \[
+                M"(t) = [(\mu + \sigma^2 t)^2 + \sigma^2] 
+                \exp \left( \mu t + \frac{\sigma^2 t^2}{2} \right) 
+        .\]
+        If $X$ is  $N(\mu, \sigma^2)$,
+        then $Z = (X-\mu) / \sigma$ is $N(0,1)$.
+        If $X$ is  $N(\mu,\sigma^2)$,
+        then $V = (X-\mu)^2 / \sigma^2 = Z^2$ is  $\chi^2(1)$.
+\end{multicols*}
+\end{document}
+
